@@ -10,11 +10,13 @@ foo = Foo.new
 begin
   foo.bar
 rescue NoMethodError => e
-  test e.message, "NoMethodError: undefined method `bar' for Foo", "Undefined method for instance of Foo"
+  expected = "NoMethodError: undefined method `bar' for #{foo.inspect}"
+  test e.message, expected, "Undefined method for instance of Foo"
 end
 
 begin
   Foo.bar
 rescue NoMethodError => e
-  test e.message, "NoMethodError: undefined method `bar' for Foo:Class", "Undefined method for class object Foo"
+  expected = "NoMethodError: undefined method `bar' for Foo:Class"
+  test e.message, expected, "Undefined method for class object Foo"
 end
